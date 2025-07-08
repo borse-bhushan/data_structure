@@ -17,13 +17,6 @@ Example:
 Input: nums = [2, 7, 11, 15], target = 9
 Output: [0, 1]  # because nums[0] + nums[1] = 2 + 7 = 9
 
-Steps:
-Initialize an empty dictionary to store seen numbers and their indices.
-Traverse the array.
-For each element num, compute target - num (called complement).
-If the complement is already in the dictionary, return current index
-    and the index of the complement.
-Otherwise, store num and its index in the dictionary.
 """
 
 def two_sum(nums, target):
