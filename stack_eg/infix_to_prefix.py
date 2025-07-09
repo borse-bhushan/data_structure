@@ -4,7 +4,7 @@ from infix_to_postfix import infix_to_postfix
 stack_obj = Stack()
 
 
-def revers_infix(expression: list[str]):
+def revers_infix(expression: str):
 
     expression = expression[::-1]
 

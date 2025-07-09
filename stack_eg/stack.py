@@ -5,7 +5,8 @@ class Stack:
         self.stack = []
 
     def __str__(self):
-        return "[" + ", ".join(self.stack) + "]"
+        import json
+        return json.dumps(self.stack)
 
     def push(self, item):
         self.stack.append(item)
