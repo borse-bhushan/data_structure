@@ -25,7 +25,7 @@ class Stack:
 
     def peek(self):
         if not self.is_empty():
-            return self.stack[self.size() - 1]
+            return self.stack[-1]
         return False
 
 
