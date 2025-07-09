@@ -3,11 +3,19 @@ from stack import Stack
 stack_obj = Stack()
 
 
+def is_number(token):
+    try:
+        int(token)
+        return True
+    except ValueError:
+        return False
+
+
 def eval_postfix(tokens: list[str]):
 
     for token in tokens:
 
-        if token.isalnum():
+        if is_number(token):
             stack_obj.push(int(token))
 
         else:
@@ -30,3 +38,5 @@ def eval_postfix(tokens: list[str]):
 
 if __name__ == "__main__":
     print("OUT: ", eval_postfix(tokens=["2", "3", "+", "4", "*"]))
+
+    print("OUT: ", eval_postfix(tokens=["12", "-5", "*", "6", "+"]))
