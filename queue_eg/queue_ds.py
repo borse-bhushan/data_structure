@@ -7,7 +7,11 @@ class Queue:
 
     def dequeue(self):
         if not self.is_empty():
-            return self.queue.pop(self.size() - 1)
+            return self.queue.pop(0)
+
+    def front(self):
+        if not self.is_empty():
+            return self.queue[0]
 
     def is_empty(self):
         if self.queue:
