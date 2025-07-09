@@ -5,9 +5,6 @@ If no non-repeating character exists at a point, use "#".
 
 📥 Inputs & 📤 Outputs:
 ✅ Example 1:
-python
-Copy
-Edit
 Input:  stream = "aabc"
 Output: "a#bb"
 Explanation:
@@ -21,13 +18,9 @@ Explanation:
 'c' → 'b' is still first non-repeating
 
 ✅ Example 2:
-python
 Input: stream = "zz"
 Output: "z#"
 ✅ Example 3:
-python
-Copy
-Edit
 Input: stream = "abcabc"
 Output: "aaa###"
 🪜 Steps:
