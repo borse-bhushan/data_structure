@@ -16,15 +16,19 @@ def infix_to_postfix(expression: str):
 
         elif ch == "(":
             stack_obj.push(ch)
-        
+
         elif ch == ")":
-            
+
             while not stack_obj.is_empty() and stack_obj.peek() != "(":
                 results.append(stack_obj.pop())
             stack_obj.pop()
 
         else:
-            while not stack_obj.is_empty() and stack_obj.peek() != "(" and precedence.get(ch, 0) <= precedence.get(stack_obj.peek(), 0):
+            while (
+                not stack_obj.is_empty()
+                and stack_obj.peek() != "("
+                and precedence.get(ch, 0) <= precedence.get(stack_obj.peek(), 0)
+            ):
                 results.append(stack_obj.pop())
             stack_obj.push(ch)
 
@@ -33,6 +37,5 @@ def infix_to_postfix(expression: str):
 
     return "".join(results)
 
-print(
-    "OUT: ", infix_to_postfix(expression="(A+B)*C")
-)
+
+print("OUT: ", infix_to_postfix(expression="(A+B)*C"))
