@@ -25,7 +25,6 @@ def eval_postfix(tokens: list[str]):
 
             if token == "-":
                 stack_obj.push(first_op - second_op)
-    print(stack_obj)
     return stack_obj.pop()
 
 
