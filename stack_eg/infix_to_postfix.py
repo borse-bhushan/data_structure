@@ -38,4 +38,5 @@ def infix_to_postfix(expression: str):
     return "".join(results)
 
 
-print("OUT: ", infix_to_postfix(expression="(A+B)*C"))
+if __name__ == "__main__":
+    print("OUT: ", infix_to_postfix(expression="(A+B)*C"))
