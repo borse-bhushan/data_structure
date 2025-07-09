@@ -38,5 +38,5 @@ def next_greater_element_using_stack(nums):
 
 
 if __name__ == "__main__":
-    # print("OUT: ", next_greater_element(nums=[2, 1, 2, 4, 3]))
+    print("OUT: ", next_greater_element(nums=[2, 1, 2, 4, 3]))
     print("OUT: ", next_greater_element_using_stack(nums=[2, 1, 2, 4, 3]))
