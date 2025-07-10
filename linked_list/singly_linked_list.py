@@ -148,21 +148,84 @@ class LinkList:
 
         return self
 
+    def detect_loop(self):
+
+        visited = {}
+        current_node = self.head
+        result = []
+        index = 0
+        while current_node is not None:
+            cr_id = id(current_node)
+            if cr_id in visited:
+                print(f"LOOP DETECTED AT {index}")
+                break
+            index += 1
+            visited[cr_id] = True
+            result.append(str(current_node))
+            current_node = current_node.next_node
+
+        return self
+
+    def detect_loop_floyd_cycle(self):
+
+        slow = self.head
+        fast = self.head
+
+        index = 0
+        while fast and fast.next_node:
+            slow = slow.next_node
+            fast = fast.next_node.next_node
+
+            if slow == fast:
+                print(f"LOOP DETECTED AT {index}")
+                break
+
+            index += 1
+
+        return self
+
 
 if __name__ == "__main__":
 
     link_list_head = LinkList()
-    link_list_head.insert_at_end("A").insert_at_end("B").insert_at_end("c").insert_at_end("D").display().revers_ll().display()
-    # link_list_head.insert_at_end(10).insert_at_end(20).insert_at_end(
-    #     30
-    # ).display().insert_at_start(0).display().insert_at_index(
-    #     0, -1
-    # ).display().insert_at_index(
-    #     5, 40
-    # ).display().insert_at_index(
-    #     2, 5
-    # ).display().delete_by_value(
-    #     30
-    # ).display().find_index(
-    #     40
-    # ).revers_ll().display()
+
+    a = Node("A")
+    link_list_head.head = a
+
+    b = Node("B")
+    a.next_node = b
+
+    c = Node("C")
+    b.next_node = c
+
+    d = Node("D")
+    c.next_node = d
+
+    e = Node("E")
+    d.next_node = e
+
+    f = Node("F")
+    e.next_node = f
+
+    f.next_node = b
+
+    link_list_head.detect_loop_floyd_cycle()
+    link_list_head.detect_loop()
+
+    link_list_head = LinkList()
+    link_list_head.insert_at_end(10).insert_at_end(20).insert_at_end(30).insert_at_end(
+        40
+    ).display().revers_ll().display()
+    link_list_head.insert_at_end(10).insert_at_end(20).insert_at_end(
+        30
+    ).display().insert_at_start(0).display().insert_at_index(
+        0, -1
+    ).display().insert_at_index(
+        5, 40
+    ).display().insert_at_index(
+        2, 5
+    ).display().delete_by_value(
+        30
+    ).display().find_index(
+        40
+    ).revers_ll().display()
