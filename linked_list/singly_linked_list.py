@@ -7,6 +7,9 @@ class Node:
     def __str__(self):
         return f"{self.data}"
 
+    def __repr__(self):
+        return self.__str__()
+
 
 class LinkList:
     def __init__(self):
@@ -89,6 +92,50 @@ class LinkList:
         self.length -= 1
         return self
 
+    def revers_ll(self):
+
+        if self.head is None:
+            raise ValueError("Empty List")
+
+        if self.length == 1:
+            return self
+
+        index = 0
+
+        prev = None
+        curr = self.head
+
+        while self.length != index:
+            index += 1
+
+            nxt = curr.next_node
+            curr.next_node = prev
+            prev = curr
+            curr = nxt
+
+        self.head = prev
+
+        return self
+
+    def find_index(self, data):
+
+        if self.head is None:
+            raise ValueError("List is empty")
+
+        if data is None:
+            raise ValueError("Cant search none-types")
+
+        current_node = self.head
+        index = 0
+        while current_node is not None:
+            if current_node.data == data:
+                print(f"Fount at: {index}")
+                return self
+            index += 1
+            current_node = current_node.next_node
+
+        raise ValueError(f"{data} not found in the list")
+
     def display(self):
         current_node = self.head
         result = []
@@ -105,14 +152,17 @@ class LinkList:
 if __name__ == "__main__":
 
     link_list_head = LinkList()
-    link_list_head.insert_at_end(10).insert_at_end(20).insert_at_end(
-        30
-    ).display().insert_at_start(0).display().insert_at_index(
-        0, -1
-    ).display().insert_at_index(
-        5, 40
-    ).display().insert_at_index(
-        2, 5
-    ).display().delete_by_value(
-        30
-    ).display()
+    link_list_head.insert_at_end("A").insert_at_end("B").insert_at_end("c").insert_at_end("D").display().revers_ll().display()
+    # link_list_head.insert_at_end(10).insert_at_end(20).insert_at_end(
+    #     30
+    # ).display().insert_at_start(0).display().insert_at_index(
+    #     0, -1
+    # ).display().insert_at_index(
+    #     5, 40
+    # ).display().insert_at_index(
+    #     2, 5
+    # ).display().delete_by_value(
+    #     30
+    # ).display().find_index(
+    #     40
+    # ).revers_ll().display()
