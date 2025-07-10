@@ -38,24 +38,21 @@ class LinkList:
         return self
 
     def insert_at_index(self, index, data):
+        if index < 0 or index > self.length:
+            raise IndexError(f"The element can't be inserted at index {index}")
 
         if index == 0:
-            self.insert_at_start(data)
-            return self
+            return self.insert_at_start(data)
 
-        if index > (self.length + 1) or index < 0:
-            raise IndexError(f"The element cant be inserted at {index}")
-
-        if index == (self.length + 1):
-            self.insert_at_end(data)
-            return self
+        if index == self.length:
+            return self.insert_at_end(data)
 
         self.length += 1
 
         new_node = Node(data=data)
-        current_node = self.head.next_node
-
+        current_node = self.head
         current_index = 0
+
         while current_index < index - 1:
             current_node = current_node.next_node
             current_index += 1
@@ -63,6 +60,33 @@ class LinkList:
         new_node.next_node = current_node.next_node
         current_node.next_node = new_node
 
+        return self
+
+    def delete_by_value(self, data):
+
+        if self.head is None:
+            raise ValueError("List is empty")
+
+        if self.head.data == data:
+            self.head = self.head.next_node
+            self.length -= 1
+            return self
+
+        prev_node = self.head
+        current_node = self.head.next_node
+
+        while current_node is not None:
+            if current_node.data == data:
+                break
+
+            prev_node = current_node
+            current_node = current_node.next_node
+
+        if current_node is None:
+            raise ValueError(f"{data} not found")
+
+        prev_node.next_node = current_node.next_node
+        self.length -= 1
         return self
 
     def display(self):
@@ -86,7 +110,9 @@ if __name__ == "__main__":
     ).display().insert_at_start(0).display().insert_at_index(
         0, -1
     ).display().insert_at_index(
-        6, 40
+        5, 40
     ).display().insert_at_index(
         2, 5
+    ).display().delete_by_value(
+        30
     ).display()
