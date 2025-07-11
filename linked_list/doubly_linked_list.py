@@ -39,7 +39,19 @@ class LinkList:
         return self
 
     def insert_at_start(self, data):
-        pass
+
+        self.length += 1
+        if self.head is None:
+            self.head = Node(data=data)
+            return self
+
+        head = self.head
+        new_node = Node(data=data)
+
+        new_node.next_node = head
+        head.prev_node = new_node
+        self.head = new_node
+        return self
 
     def display(self):
         node = self.head
@@ -48,23 +60,17 @@ class LinkList:
         while node:
 
             node_data = f"{str(node)}"
-
-            next_data = f"{str(node.next_node or "")}"
-            if next_data:
-                next_data = "N-" + next_data + "-> " or ""
-
-            prev_data = f"{str(node.prev_node or "")}"
-            if prev_data:
-                prev_data = "<-P-" + prev_data or ""
-
-            result.append(f"{prev_data}|C-{node_data}|{next_data}")
+            result.append(node_data)
 
             node = node.next_node
 
-        print(" ".join(result))
+        print(" <-> ".join(result))
+        return self
 
 
 if __name__ == "__main__":
     link_list_head = LinkList()
 
-    link_list_head.insert_at_end(10).insert_at_end(20).insert_at_end(30).display()
+    link_list_head.insert_at_end(10).insert_at_end(20).insert_at_end(
+        30
+    ).display().insert_at_start(0).display()
