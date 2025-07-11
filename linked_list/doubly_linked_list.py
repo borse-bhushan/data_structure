@@ -67,10 +67,36 @@ class LinkList:
         print(" <-> ".join(result))
         return self
 
+    def reverse_ll(self):
+        if self.head is None:
+            raise ValueError("Empty List")
+
+        current = self.head
+        prev_node = None
+
+        while current is not None:
+            temp = current.next_node
+
+            current.next_node = current.prev_node
+            current.prev_node = temp
+
+            prev_node = current
+            current = temp
+
+        self.head = prev_node
+        return self
+
+    def delete(self):
+
+        if self.head is None:
+            return self
+
+        return self
+
 
 if __name__ == "__main__":
     link_list_head = LinkList()
 
     link_list_head.insert_at_end(10).insert_at_end(20).insert_at_end(
         30
-    ).display().insert_at_start(0).display()
+    ).insert_at_start(0).reverse_ll().display()
