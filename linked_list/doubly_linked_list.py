@@ -86,10 +86,35 @@ class LinkList:
         self.head = prev_node
         return self
 
-    def delete(self):
+    def delete(self, data):
 
         if self.head is None:
-            return self
+            raise ValueError("Empty List")
+
+        current = self.head
+        while current:
+
+            if current.data != data:
+                current = current.next_node
+                continue
+
+            self.length -= 1
+            prev_node = current.prev_node
+            next_node = current.next_node
+
+            current = current.next_node
+
+            if prev_node is None:
+                self.head = next_node
+                if next_node:
+                    next_node.prev_node = None
+
+            elif next_node is None:
+                prev_node.next_node = None
+
+            else:
+                next_node.next_node = next_node
+                next_node.prev_node = prev_node
 
         return self
 
@@ -99,4 +124,4 @@ if __name__ == "__main__":
 
     link_list_head.insert_at_end(10).insert_at_end(20).insert_at_end(
         30
-    ).insert_at_start(0).reverse_ll().display()
+    ).insert_at_start(0).display().delete(0).display()
