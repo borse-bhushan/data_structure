@@ -33,15 +33,21 @@ class LinkList:
         return self
 
     def display(self):
+
+        if not self.head:
+            raise ValueError("Empty List")
+
         node = self.head
 
         result = []
-        while node:
+        while node.next_node != self.head:
 
             node_data = f"{str(node)}"
             result.append(node_data)
 
             node = node.next_node
+
+        result.append(str(node.data))
 
         str_pr = " -> ".join(result)
 
