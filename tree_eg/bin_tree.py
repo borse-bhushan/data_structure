@@ -196,12 +196,31 @@ class Tree:
 
         print("\n\n")
 
+    def identical_tree(self, root1: Node, root2: Node):
+
+        if not root1 and not root2:
+            return True
+
+        if not root1 or not root2:
+            return False
+
+        is_identical1 = self.identical_tree(root1.left, root2.left)
+        is_identical2 = self.identical_tree(root1.right, root2.right)
+
+        return is_identical1 and is_identical2 and root1.data == root2.data
+
 
 if __name__ == "__main__":
 
     pre_order_seq = [1, 2, -1, -1, 3, 4, -1, -1, 5, -1, -1]
+
     tree = Tree()
     tree.build_tree(pre_order_seq)
+
+    tree2 = Tree()
+    tree2.build_tree(pre_order_seq)
+
+    print("identical_tree >> ", tree2.identical_tree(tree.root, tree2.root))
     # .pre_order_traverse().in_order_traverse().post_order_traverse().level_order().height_of_tree()
 
     # print("height_of_tree>> ", tree.height_of_tree(tree.root))
@@ -209,4 +228,4 @@ if __name__ == "__main__":
     # print("count_leaf_nodes>>    ", tree.count_leaf_nodes(tree.root))
     # print("is_tree_balanced>>    ", tree.is_tree_balanced())
     # tree.mirror_tree(tree.root)
-    tree.level_order_with_line()
+    # tree.level_order_with_line()
