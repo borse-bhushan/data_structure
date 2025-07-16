@@ -129,7 +129,7 @@ class Tree:
 
         return left_height + right_height
 
-    def _is_tree_balanced(self, root):
+    def _is_tree_balanced(self, root: Node):
 
         if not root:
             return 0, True
@@ -144,8 +144,6 @@ class Tree:
             and is_right_balance
             and abs(left_height - right_height) <= 1
         )
-
-        print(root, is_current_balanced)
 
         return current_height, is_current_balanced
 
