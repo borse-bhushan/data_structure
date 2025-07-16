@@ -163,6 +163,39 @@ class Tree:
 
         root.left, root.right = root.right, root.left
 
+    def level_order_with_line(self):
+        print("\n\n")
+        from collections import deque
+
+        queue: deque[Node] = deque()
+        root = self.root
+
+        queue.append(root)
+        queue.append(None)
+
+        while queue:
+
+            node = queue.popleft()
+
+            if node is None:
+
+                if not queue:
+                    break
+
+                print("\n")
+                queue.append(None)
+                continue
+
+            print(str(node) + " ", end="")
+
+            if node.left:
+                queue.append(node.left)
+
+            if node.right:
+                queue.append(node.right)
+
+        print("\n\n")
+
 
 if __name__ == "__main__":
 
@@ -175,5 +208,5 @@ if __name__ == "__main__":
     # print("count_nodes>>    ", tree.count_nodes(tree.root))
     # print("count_leaf_nodes>>    ", tree.count_leaf_nodes(tree.root))
     # print("is_tree_balanced>>    ", tree.is_tree_balanced())
-    tree.mirror_tree(tree.root)
-    tree.level_order()
+    # tree.mirror_tree(tree.root)
+    tree.level_order_with_line()
