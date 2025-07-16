@@ -154,6 +154,15 @@ class Tree:
         _, is_balanced = self._is_tree_balanced(self.root)
         return is_balanced
 
+    def mirror_tree(self, root: Node):
+        if not root:
+            return None
+
+        self.mirror_tree(root.left)
+        self.mirror_tree(root.right)
+
+        root.left, root.right = root.right, root.left
+
 
 if __name__ == "__main__":
 
@@ -165,4 +174,6 @@ if __name__ == "__main__":
     # print("height_of_tree>> ", tree.height_of_tree(tree.root))
     # print("count_nodes>>    ", tree.count_nodes(tree.root))
     # print("count_leaf_nodes>>    ", tree.count_leaf_nodes(tree.root))
-    print("is_tree_balanced>>    ", tree.is_tree_balanced())
+    # print("is_tree_balanced>>    ", tree.is_tree_balanced())
+    tree.mirror_tree(tree.root)
+    tree.level_order()
