@@ -5,6 +5,12 @@ class Node:
         self.left: Node = None
         self.right: Node = None
 
+    def __str__(self):
+        return f"{self.data}"
+
+    def __repr__(self):
+        return self.__str__()
+
 
 class Tree:
     def __init__(self):
@@ -110,6 +116,46 @@ class Tree:
 
         return 1 + left_height + right_height
 
+    def count_leaf_nodes(self, root: Node):
+
+        if not root:
+            return 0
+
+        if not root.left and not root.right:
+            return 1
+
+        left_height = self.count_leaf_nodes(root.left)
+        right_height = self.count_leaf_nodes(root.right)
+
+        return left_height + right_height
+
+    def _is_tree_balanced(self, root):
+
+        if not root:
+            return 0, True
+
+        left_height, is_left_balance = self._is_tree_balanced(root.left)
+        right_height, is_right_balance = self._is_tree_balanced(root.right)
+
+        current_height = 1 + max(left_height, right_height)
+
+        is_current_balanced = (
+            is_left_balance
+            and is_right_balance
+            and abs(left_height - right_height) <= 1
+        )
+
+        print(root, is_current_balanced)
+
+        return current_height, is_current_balanced
+
+    def is_tree_balanced(self):
+        if not self.root or (not self.root.left and not self.root.right):
+            return True
+
+        _, is_balanced = self._is_tree_balanced(self.root)
+        return is_balanced
+
 
 if __name__ == "__main__":
 
@@ -118,5 +164,7 @@ if __name__ == "__main__":
     tree.build_tree(pre_order_seq)
     # .pre_order_traverse().in_order_traverse().post_order_traverse().level_order().height_of_tree()
 
-    print("height_of_tree>> ", tree.height_of_tree(tree.root))
-    print("count_nodes>>    ", tree.count_nodes(tree.root))
+    # print("height_of_tree>> ", tree.height_of_tree(tree.root))
+    # print("count_nodes>>    ", tree.count_nodes(tree.root))
+    # print("count_leaf_nodes>>    ", tree.count_leaf_nodes(tree.root))
+    print("is_tree_balanced>>    ", tree.is_tree_balanced())
