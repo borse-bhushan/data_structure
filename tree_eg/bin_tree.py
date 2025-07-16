@@ -87,12 +87,36 @@ class Tree:
 
             if ele.right:
                 queue.append(ele.right)
+        print("-----------------")
+
+        return self
+
+    def height_of_tree(self, root: Node):
+        if not root:
+            return 0
+
+        left_height = self.height_of_tree(root.left)
+        right_height = self.height_of_tree(root.right)
+
+        return 1 + max(left_height, right_height)
+
+    def count_nodes(self, root: Node):
+
+        if not root:
+            return 0
+
+        left_height = self.count_nodes(root.left)
+        right_height = self.count_nodes(root.right)
+
+        return 1 + left_height + right_height
 
 
 if __name__ == "__main__":
 
     pre_order_seq = [1, 2, -1, -1, 3, 4, -1, -1, 5, -1, -1]
     tree = Tree()
-    tree.build_tree(
-        pre_order_seq
-    ).pre_order_traverse().in_order_traverse().post_order_traverse().level_order()
+    tree.build_tree(pre_order_seq)
+    # .pre_order_traverse().in_order_traverse().post_order_traverse().level_order().height_of_tree()
+
+    print("height_of_tree>> ", tree.height_of_tree(tree.root))
+    print("count_nodes>>    ", tree.count_nodes(tree.root))
