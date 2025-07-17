@@ -74,11 +74,17 @@ class BST:
             return False
         return self._search(self.root, data)
 
-    def is_valid_bst(self, root):
+    def is_valid_bst(self, root: Node, min_val=float("-inf"), max_val=float("inf")):
 
-        if root is None:
+        if not root:
             return True
-        pass
+
+        if not min_val < root.data < max_val:
+            return False
+
+        return self.is_valid_bst(root.left, min_val, root.data) and self.is_valid_bst(
+            root.right, root.data, max_val
+        )
 
 
 if __name__ == "__main__":
@@ -86,6 +92,4 @@ if __name__ == "__main__":
 
     bst.insert(data=10).insert(data=20).insert(5)
 
-    # print(bst.min_value(bst.root))
-    # print(bst.max_value(bst.root))
     print(bst.is_valid_bst(bst.root))
