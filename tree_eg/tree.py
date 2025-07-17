@@ -209,6 +209,19 @@ class Tree:
 
         return is_identical1 and is_identical2 and root1.data == root2.data
 
+    def diameter_of_tree(self, root: Node):
+
+        if not root:
+            return 0
+
+        left_diameter = self.diameter_of_tree(root.left)
+        right_diameter = self.diameter_of_tree(root.right)
+
+        left_h = self.height_of_tree(root.left)
+        right_h = self.height_of_tree(root.right)
+
+        return max(left_diameter, right_diameter, left_h + right_h)
+
 
 if __name__ == "__main__":
 
